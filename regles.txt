@@ -1,0 +1,4 @@
+Règles
+- Deviner le mot en pesant sur une lettre à la fois sur votre clavier.
+- Pour gagner, compléter le mot avant que le bonhomme soit pendu.
+- Chaque mauvaise devinette ajoutera un membre du bonhomme.
