@@ -11,7 +11,7 @@ public class FenetreRegles extends JFrame {
 	private JTextArea area;
 	private static Scanner input;
 	
-	public FenetreRegles() {
+	public FenetreRegles() {		//Crée la fenêtre pour les règles du jeu
 		super("Règles");
 		setSize(450, 200);
 		area = new JTextArea();
@@ -22,7 +22,7 @@ public class FenetreRegles extends JFrame {
 		
 	}
 	
-	public static void ouvrirFichier() {
+	public static void ouvrirFichier() {	//Ouvre le fichier texte qui contient les règles
 		try
 	      {
 	         input = new Scanner(Paths.get("regles.txt")); 
@@ -34,7 +34,7 @@ public class FenetreRegles extends JFrame {
 	      } 
 	}
 	
-	public void lireFichier() {
+	public void lireFichier() {		//Lis et affiche les règles
 		 try 
 	      {
 	         while (input.hasNext()) // parcourir tous le fichier

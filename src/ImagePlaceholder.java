@@ -1,5 +1,5 @@
 
-public class ImagePlaceholder {
+public class ImagePlaceholder {		//Classe pour garder les position absolues des images dessinés
 	private final int X;
 	private final int Y;
 	

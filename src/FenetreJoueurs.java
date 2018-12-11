@@ -10,7 +10,6 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
-
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -30,7 +29,7 @@ public class FenetreJoueurs extends JFrame {
 	
 	private static ObjectInputStream input;
 	private static ObjectOutputStream output;
-	private static ArrayList<Joueur> listeJoueurs = new ArrayList<Joueur>();
+	private static ArrayList<Joueur> listeJoueurs = new ArrayList<Joueur>(); //Liste qui contient les informations des joueurs gagnants
 	
 	public FenetreJoueurs() {
 		super("Login");
@@ -47,12 +46,13 @@ public class FenetreJoueurs extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				try {
-					if(nomField.getText().equals("") || prenomField.getText().equals(""))
-						throw new Exception("Informations ne sont pas entrï¿½s.");
+					if(nomField.getText().equals("") || prenomField.getText().equals("")) //Vérifie si l'utilisateur a entré son nom et prénom
+						throw new Exception("Informations ne sont pas entrés.");
 				
 					joueur = new Joueur(nomField.getText(), prenomField.getText());
 					
-					BonhommePenduMain frame = new BonhommePenduMain(joueur);
+					//Crée la fenêtre du jeu Bonhomme Pendu
+					BonhommePendu frame = new BonhommePendu(joueur);
 					frame.setVisible(true);
 					frame.setResizable(false);
 					frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -61,7 +61,7 @@ public class FenetreJoueurs extends JFrame {
 					fermer();
 				}
 				catch(NullPointerException e) {	//Change this to french
-					JOptionPane.showMessageDialog(null, "Impossible to find sound clips", "Erreur", JOptionPane.ERROR_MESSAGE);
+					JOptionPane.showMessageDialog(null, "Erreur à retrouver les fichiers musique", "Erreur", JOptionPane.ERROR_MESSAGE);
 				}
 				catch (Exception e) {
 					JOptionPane.showMessageDialog(null, e.getMessage(), "Erreur", JOptionPane.ERROR_MESSAGE);
@@ -71,7 +71,7 @@ public class FenetreJoueurs extends JFrame {
 		});
 	}
 	
-	public FenetreJoueurs(boolean b) {	//Change variable shceme
+	public FenetreJoueurs(boolean b) {	//Contructeur de la fenêtre du classement des joueurs 
 		super("Liste de joueurs");
 		setSize(400, 500);
 		area = new JTextArea("Meilleurs scores: \n");
@@ -83,25 +83,25 @@ public class FenetreJoueurs extends JFrame {
 	}
 	
 	
-	public static void openFile() {
+	public static void openFile() {		
 		try {
 			input = new ObjectInputStream(Files.newInputStream(Paths.get("listeJoueurs.txt")));
 		}
 		catch(IOException ioException) {
 			System.out.println(ioException.getMessage());
-			JOptionPane.showMessageDialog(null, "Erreur ï¿½ ouvrir le fichier", "Erreur", JOptionPane.ERROR_MESSAGE);
+			JOptionPane.showMessageDialog(null, "Erreur à ouvrir le fichier", "Erreur", JOptionPane.ERROR_MESSAGE);
 		}
 	}
 	
-	public static void readFile(Joueur j, boolean gagne) {
+	public static void readFile(Joueur j, boolean gagne) {	//Lecture du fichier
 		listeJoueurs.removeAll(listeJoueurs);
 		if(gagne)
 			listeJoueurs.add(j);
 		
 		try {
-			while(true) 
-			{
-				Joueur joueur = (Joueur) input.readObject();
+			while(true) {
+		
+				Joueur joueur = (Joueur) input.readObject();	//Ajoute à la liste de joueurs
 				listeJoueurs.add(joueur);
 			}
 		}
@@ -110,7 +110,7 @@ public class FenetreJoueurs extends JFrame {
 	       System.err.println("Objet invalide.");
 	    } 
 	    catch (IOException ioException) {
-	       System.err.println("Erreur de lecture ï¿½ partir du fichier");
+	       System.err.println("Erreur de lecture à partir du fichier");
 	    }
 		catch (NullPointerException e) {
 			System.err.println("Aucun object dans la liste");
@@ -124,18 +124,18 @@ public class FenetreJoueurs extends JFrame {
 				input.close();
 		}
 		catch (IOException ioException) {
-			System.err.println("Erreur ï¿½ fermer le fichier.");
+			System.err.println("Erreur à fermer le fichier.");
 	         System.exit(1);
 		}
 	}
 	
-	public static void writeJoueurs() {
+	public static void writeJoueurs() {	//Écrit les joueurs dans le fichier sous forme XML
 		
 		try {
 			output = new ObjectOutputStream(Files.newOutputStream(Paths.get("listeJoueurs.txt")));
 		}
 		catch(IOException ioException) {
-			System.err.println("Erreur ï¿½ ouvrir le fichier. fin du programme.");
+			System.err.println("Erreur à ouvrir le fichier. fin du programme.");
 	        System.exit(1); 
 		}
 		for(Joueur j : listeJoueurs) {
@@ -156,7 +156,7 @@ public class FenetreJoueurs extends JFrame {
 		
 	}
 	
-	public void sortList() {
+	public void sortList() {	//Trie la liste de joueurs selon leurs scores
 		Collections.sort(listeJoueurs, new Comparator<Joueur>() {
 			@Override
 			public int compare(Joueur j1, Joueur j2) {
