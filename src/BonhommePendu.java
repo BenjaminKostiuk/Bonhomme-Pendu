@@ -26,18 +26,17 @@ import java.util.NoSuchElementException;
 
 import java.security.SecureRandom;
 
-//Projet final pour ICS4U
-//Jeu de bonhomme pendu par Benjamin Kostiuk and Vyvy Ngo
+//Jeu de bonhomme pendu crÃ©Ã©e par Benjamin Kostiuk and Vyvy Ngo
 
 /* 
- * Ce projet utilise le concept des charactères et des positions de ces charactères dans l'alphabet
- * On assume que 'a' à la position 0, 'b' = 1, etc. 
- * Plusieurs fois le charactère est échangé avec sa position dans l'alphabet
+ * Ce projet utilise le concept des charactï¿½res et des positions de ces charactï¿½res dans l'alphabet
+ * On assume que 'a' ï¿½ la position 0, 'b' = 1, etc. 
+ * Plusieurs fois le charactï¿½re est ï¿½changï¿½ avec sa position dans l'alphabet
  */ 
 public class BonhommePendu extends JFrame implements KeyListener {
 
-	private String mot;		//Mot choisi aléatoirement du fichier texte
-	//Contient la URLs des images utilisées
+	private String mot;		//Mot choisi alï¿½atoirement du fichier texte
+	//Contient la URLs des images utilisï¿½es
 	private String[] paths = {"A.png", "B.png", "C.png", "D.png", "E.png", "F.png", "G.png", "H.png", "I.png",
 			"J.png", "K.png", "L.png", "M.png", "N.png", "O.png", "P.png", "Q.png", "R.png", "S.png", "T.png",
 			"U.png", "V.png", "W.png", "X.png", "Y.png", "Z.png", "RedA.png", "RedB.png", "RedC.png", "RedD.png",
@@ -52,7 +51,7 @@ public class BonhommePendu extends JFrame implements KeyListener {
 	private JMenuBar menuBar;									//Barre menu
 	private JMenu menu, subMenu, menuRegles, menuClassement;	//Options menu dans menuBar
 	private JMenuItem quitter = new JMenuItem("Quitter");				//Boutons pour le menu
-	private JMenuItem afficherRegles = new JMenuItem("Afficher Règles");		
+	private JMenuItem afficherRegles = new JMenuItem("Afficher Rï¿½gles");		
 	private JMenuItem voirClassement = new JMenuItem("Voir List de Joueurs");
 	private JRadioButtonMenuItem radioMenuFacile = new JRadioButtonMenuItem("Facile");
 	private JRadioButtonMenuItem radioMenuMoyen = new JRadioButtonMenuItem("Moyen");
@@ -65,11 +64,11 @@ public class BonhommePendu extends JFrame implements KeyListener {
 	private final static int LETTRE = 2;
 	private final static int GAGNER = 3;
 	
-	public BonhommePendu(Joueur j) {	//Constructeur de la fenêtre du jeu
+	public BonhommePendu(Joueur j) {	//Constructeur de la fenï¿½tre du jeu
 		super("BonhommePendu");
 		setBackground(Color.WHITE);
 		setSize(1200, 700);
-		//Ajoute l'image de l'arrière plan
+		//Ajoute l'image de l'arriï¿½re plan
 		try {
 			this.setContentPane(new JLabel(new ImageIcon(ImageIO.read(new File("backdrop.jpg")))));	
 		}
@@ -77,18 +76,18 @@ public class BonhommePendu extends JFrame implements KeyListener {
 			e.printStackTrace();
 		}
 		
-		jouerSon(true, ARRIERE_PLAN);	//Joue la musique en arrière-plan
+		jouerSon(true, ARRIERE_PLAN);	//Joue la musique en arriï¿½re-plan
 		joueur = j;						//Donne la valeur au joueur
 		activerCle = true;				
-		newGame(0);						//Commence un nouveau jeu avec la difficulté facile
+		newGame(0);						//Commence un nouveau jeu avec la difficultï¿½ facile
 		
-		menuBar = new JMenuBar();		//Crée la barre menu
+		menuBar = new JMenuBar();		//Crï¿½e la barre menu
 		menu = new JMenu("Options");
 		menuBar.add(menu);
 		subMenu = new JMenu("Nouveau Jeu");
 		menu.add(subMenu);
 		
-		ButtonGroup group = new ButtonGroup();	//Crée un buttonGroup pour gérer les radioButtons 
+		ButtonGroup group = new ButtonGroup();	//Crï¿½e un buttonGroup pour gï¿½rer les radioButtons 
 		group.add(radioMenuFacile);				//Ajoute les options pour la difficulte, 
 		subMenu.add(radioMenuFacile);			//Facile, Moyen ou difficile
 		radioMenuFacile.setSelected(true);
@@ -97,8 +96,8 @@ public class BonhommePendu extends JFrame implements KeyListener {
 		group.add(radioMenuDifficile);
 		subMenu.add(radioMenuDifficile);
 		
-		menu.add(quitter);						//Ajoute les options quitter, afficher règles et
-		menuRegles = new JMenu("Règles");		//classement au menu
+		menu.add(quitter);						//Ajoute les options quitter, afficher rï¿½gles et
+		menuRegles = new JMenu("Rï¿½gles");		//classement au menu
 		menuBar.add(menuRegles);
 		menuRegles.add(afficherRegles);
 		menuClassement = new JMenu("Classement");
@@ -107,9 +106,9 @@ public class BonhommePendu extends JFrame implements KeyListener {
 		
 		this.setJMenuBar(menuBar);
 		
-		setImagePositions();		//Ceci créera et placera les positions de images
+		setImagePositions();		//Ceci crï¿½era et placera les positions de images
 		
-		radioMenuButtonHandler handler = new radioMenuButtonHandler();	//Crée un handler pour le radioBoutons
+		radioMenuButtonHandler handler = new radioMenuButtonHandler();	//Crï¿½e un handler pour le radioBoutons
 		
 		radioMenuFacile.addActionListener(handler);		//Ajoute le handler au radioBoutons comme ActionListener
 		radioMenuMoyen.addActionListener(handler);
@@ -124,11 +123,11 @@ public class BonhommePendu extends JFrame implements KeyListener {
 			
 		});
 		
-		afficherRegles.addActionListener(new ActionListener() {	//Classe anonyme pour le bouton afficherRègles
+		afficherRegles.addActionListener(new ActionListener() {	//Classe anonyme pour le bouton afficherRï¿½gles
 
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				FenetreRegles frame = new FenetreRegles();		//Crée une fenêtre pour afficher les règles
+				FenetreRegles frame = new FenetreRegles();		//Crï¿½e une fenï¿½tre pour afficher les rï¿½gles
 				frame.setVisible(true);
 				frame.setResizable(false);
 				frame.setLocation(40, 70);
@@ -141,7 +140,7 @@ public class BonhommePendu extends JFrame implements KeyListener {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				
-				FenetreJoueurs.openFile();					//Lit les scores et les ajoute à la liste de joueurs
+				FenetreJoueurs.openFile();					//Lit les scores et les ajoute ï¿½ la liste de joueurs
 				FenetreJoueurs.readFile(joueur, false);
 				FenetreJoueurs.closeInput();
 				
@@ -156,7 +155,7 @@ public class BonhommePendu extends JFrame implements KeyListener {
 		this.addKeyListener(this);	//Ajoute cette classe comme keyListener
 	}
 	
-	private class radioMenuButtonHandler implements ActionListener {	//Classe privée pour gérer les radioBoutons du menu
+	private class radioMenuButtonHandler implements ActionListener {	//Classe privï¿½e pour gï¿½rer les radioBoutons du menu
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
@@ -183,37 +182,37 @@ public class BonhommePendu extends JFrame implements KeyListener {
 			input = new Scanner(Paths.get("listeMots.txt"));
 		}
 		catch(IOException e) {
-			JOptionPane.showMessageDialog(null, "Erreur à ouvrir le fichier", "Erreur", JOptionPane.ERROR_MESSAGE);
+			JOptionPane.showMessageDialog(null, "Erreur ï¿½ ouvrir le fichier", "Erreur", JOptionPane.ERROR_MESSAGE);
 			System.exit(1);
 		}
 	}
 	
-	public static String readRecords(int difficulte) {			//Lis les mots du fichier et retourne un mot choisi aléatoirement
+	public static String readRecords(int difficulte) {			//Lis les mots du fichier et retourne un mot choisi alï¿½atoirement
 		ArrayList<String> mots = new ArrayList<String>();
 		SecureRandom rdm = new SecureRandom();		
 		
 		try {
-			while(input.hasNextLine()) {		//Ajoute un mot à la liste s'ils appartiennent à la difficulte
+			while(input.hasNextLine()) {		//Ajoute un mot ï¿½ la liste s'ils appartiennent ï¿½ la difficulte
 				String mot = input.nextLine();
-				if(difficulte == 0 && mot.length() > 6) {	//Mots facile ont une longeur supérieur à 6 
+				if(difficulte == 0 && mot.length() > 6) {	//Mots facile ont une longeur supï¿½rieur ï¿½ 6 
 					mots.add(mot);
 				}
-				else if(difficulte == 1 && mot.length() <= 6 && mot.length() >= 5) { //Mots de difficulté moyenne ont une longeur entre 6 et 5 
+				else if(difficulte == 1 && mot.length() <= 6 && mot.length() >= 5) { //Mots de difficultï¿½ moyenne ont une longeur entre 6 et 5 
 					mots.add(mot);
 				}
-				else if(difficulte == 2 && mot.length() < 5) { //Mots difficile ont une longeur inférieur à 5
+				else if(difficulte == 2 && mot.length() < 5) { //Mots difficile ont une longeur infï¿½rieur ï¿½ 5
 					mots.add(mot);
 				}
 			}
 			
-			return mots.get(rdm.nextInt(mots.size()));		//Retourne un mot aléatoirement de la liste de mots correspondants
+			return mots.get(rdm.nextInt(mots.size()));		//Retourne un mot alï¿½atoirement de la liste de mots correspondants
 		}
 		catch(NoSuchElementException e) {
 			JOptionPane.showMessageDialog(null, "Erreur : Le fichier est mal ecrit.", "Erreur", JOptionPane.ERROR_MESSAGE);
 			System.exit(1);
 		}
 		catch(IllegalStateException e) {
-			JOptionPane.showMessageDialog(null, "Erreur : Ne peut pas lire à partir du fichier.", "Erreur", JOptionPane.ERROR_MESSAGE);
+			JOptionPane.showMessageDialog(null, "Erreur : Ne peut pas lire ï¿½ partir du fichier.", "Erreur", JOptionPane.ERROR_MESSAGE);
 		}
 		return null;
 	}
@@ -236,7 +235,7 @@ public class BonhommePendu extends JFrame implements KeyListener {
 		return lettres;
 	}
 	
-	public void setImagePositions() {	//Crée les objects ImagePlaceholder avec la position abs de chaque image
+	public void setImagePositions() {	//Crï¿½e les objects ImagePlaceholder avec la position abs de chaque image
 		int startX = 610;
 		//Pour les images des lettres
 		for(int x = 0; x < 6; x++) {
@@ -258,7 +257,7 @@ public class BonhommePendu extends JFrame implements KeyListener {
 			positions[x] = new ImagePlaceholder(startX, 310);
 			startX += 80;
 			
-		//Pour les images des pièces du bonhomme
+		//Pour les images des piï¿½ces du bonhomme
 		positions[26] = new ImagePlaceholder(387,240);
 		positions[27] = new ImagePlaceholder(415,308);
 		positions[28] = new ImagePlaceholder(422,310);
@@ -268,7 +267,7 @@ public class BonhommePendu extends JFrame implements KeyListener {
 		}
 	}
 	
-	private boolean containsLetter(int index) { //Vérifie si la lettre passé est contenu dans le mot
+	private boolean containsLetter(int index) { //Vï¿½rifie si la lettre passï¿½ est contenu dans le mot
 		char x = findChar(index);
 		for(int i = 0; i < mot.length(); i++) {
 			if(x == mot.charAt(i))
@@ -277,7 +276,7 @@ public class BonhommePendu extends JFrame implements KeyListener {
 		return false;
 	}
 	
-	private char findChar(int x) {	//Retourne le charactère associée avec l'index de la lettre dans l'alphabet
+	private char findChar(int x) {	//Retourne le charactï¿½re associï¿½e avec l'index de la lettre dans l'alphabet
 		char c = 'a';				// 'a' ayant la position de 0, 'b' de 1, etc. 
 		for(int y = 0; y < x; y++) {
 			c++;
@@ -285,31 +284,31 @@ public class BonhommePendu extends JFrame implements KeyListener {
 		return c;
 	}
 	
-	public int findInt(char a) throws ExceptionLettre {	//Retourne l'index associée avec un charactère
+	public int findInt(char a) throws ExceptionLettre {	//Retourne l'index associï¿½e avec un charactï¿½re
 		char x = 'a';
 		for(int i = 0; i < 26; i++) {
 			if(a == x) {
 				return i;
 			}
 			else if (i == 25){
-				throw new ExceptionLettre(a);	//Si le charactère n'est pas contenu dans l'alphabet lance une exception ExceptionLettre
+				throw new ExceptionLettre(a);	//Si le charactï¿½re n'est pas contenu dans l'alphabet lance une exception ExceptionLettre
 			}
 			x++;
 		}
 		return 'z';
 	}
 	
-	public void endGame(int hangman) {		//Verifie si la partie est terminé et si le jeu est gagné ou perdu
+	public void endGame(int hangman) {		//Verifie si la partie est terminï¿½ et si le jeu est gagnï¿½ ou perdu
 		char[] lettres = mot.toCharArray();
 		
 		if(hangman == 6) {		//Si perdu
-			jouerSon(true, GAGNER);	//Jouer le son pour une partie gagné
+			jouerSon(true, GAGNER);	//Jouer le son pour une partie gagnï¿½
 			JOptionPane.showMessageDialog(null, "Bonhomme pendu! Jouez encore?", "Jeu perdu", JOptionPane.INFORMATION_MESSAGE);
-			activerCle = false;		//Désactive l'option pour entrer plus de lettres
+			activerCle = false;		//Dï¿½sactive l'option pour entrer plus de lettres
 		}
 		else {					
 			boolean test = true;
-			for(char c : lettres) {		//Détermine si tous les lettres ont étés choisies
+			for(char c : lettres) {		//Dï¿½termine si tous les lettres ont ï¿½tï¿½s choisies
 				try {
 					if(!estChoisi[findInt(c)])
 						test = false;
@@ -317,7 +316,7 @@ public class BonhommePendu extends JFrame implements KeyListener {
 					e.printStackTrace();
 				}
 			}
-			if(test) {	//Si gagné
+			if(test) {	//Si gagnï¿½
 				jouerSon(false, GAGNER);
 				int difficulte = 0;
 				if(radioMenuFacile.isSelected())
@@ -333,7 +332,7 @@ public class BonhommePendu extends JFrame implements KeyListener {
 				FenetreJoueurs.closeInput();
 				FenetreJoueurs.writeJoueurs();
 				
-				JOptionPane.showMessageDialog(null, "Jeu Gagné! Jouez encore?", "Jeu gagnée", JOptionPane.INFORMATION_MESSAGE);
+				JOptionPane.showMessageDialog(null, "Jeu Gagnï¿½! Jouez encore?", "Jeu gagnï¿½e", JOptionPane.INFORMATION_MESSAGE);
 				activerCle = false;
 			}
 		}
@@ -342,7 +341,7 @@ public class BonhommePendu extends JFrame implements KeyListener {
 
 	public void newGame(int difficulte) {		//Initialize un nouveau jeu
 		for(int x = 0; x < estChoisi.length; x++) {
-			estChoisi[x] = false;		//Remets les lettres choisi à false
+			estChoisi[x] = false;		//Remets les lettres choisi ï¿½ false
 		}
 		openFile();
 		mot = readRecords(difficulte);	//Choisi un nouveau mot du fichier texte
@@ -353,9 +352,9 @@ public class BonhommePendu extends JFrame implements KeyListener {
 	@Override
 	public void paint(Graphics g) {
 		super.paint(g);
-		Graphics2D g2 = (Graphics2D)g;	//Crée un object Graphics 2D
+		Graphics2D g2 = (Graphics2D)g;	//Crï¿½e un object Graphics 2D
 		
-		int start = 600 - (90 * mot.length() - 30) / 2;	//Donne la position abs de la première lettre
+		int start = 600 - (90 * mot.length() - 30) / 2;	//Donne la position abs de la premiï¿½re lettre
 		int piecesBonhomme = 0;
 		
 		//Dessine les lettres
@@ -383,7 +382,7 @@ public class BonhommePendu extends JFrame implements KeyListener {
 					catch (IOException e) {
 						e.printStackTrace();
 					}
-					piecesBonhomme++;	//Ajoute un des pièces du bonhomme pendu pour chaque mauvaise lettre
+					piecesBonhomme++;	//Ajoute un des piï¿½ces du bonhomme pendu pour chaque mauvaise lettre
 				}
 			}
 		}
@@ -404,7 +403,7 @@ public class BonhommePendu extends JFrame implements KeyListener {
 				e.printStackTrace();
 			}
 		}
-		endGame(piecesBonhomme);	//Vérifie si le partie est finie
+		endGame(piecesBonhomme);	//Vï¿½rifie si le partie est finie
 	}
 	
 	@Override
@@ -417,12 +416,12 @@ public class BonhommePendu extends JFrame implements KeyListener {
 	}
 
 	@Override
-	public void keyTyped(KeyEvent e) {	//Méthode KeyListener 
+	public void keyTyped(KeyEvent e) {	//Mï¿½thode KeyListener 
 		if(activerCle) {
 			char lettre = e.getKeyChar();
 			try {
-				estChoisi[findInt(lettre)] = true;	//Mets l'index de la lettre à true 
-				jouerSon(containsLetter(findInt(lettre)), LETTRE); 	//Joue le son assosié avec la lettre
+				estChoisi[findInt(lettre)] = true;	//Mets l'index de la lettre ï¿½ true 
+				jouerSon(containsLetter(findInt(lettre)), LETTRE); 	//Joue le son assosiï¿½ avec la lettre
 			}
 			catch(ExceptionLettre exceptionLettre) {
 				JOptionPane.showMessageDialog(null, exceptionLettre, "Erreur", JOptionPane.ERROR_MESSAGE);	//Message erreur pour une lettre invalide
@@ -431,7 +430,7 @@ public class BonhommePendu extends JFrame implements KeyListener {
 		}
 	}
 
-	public void jouerSon(boolean gagner, int choix) {	//Méthode qui choisi quel ficher .wav joueur
+	public void jouerSon(boolean gagner, int choix) {	//Mï¿½thode qui choisi quel ficher .wav joueur
 		try {
 			URL son = null;
 			Clip music = AudioSystem.getClip();
@@ -470,7 +469,7 @@ public class BonhommePendu extends JFrame implements KeyListener {
 	}
 	
 	public static void main(String[] args) {		
-		FenetreJoueurs login = new FenetreJoueurs();	//Crée la fenêtre pour le login du joueur
+		FenetreJoueurs login = new FenetreJoueurs();	//Crï¿½e la fenï¿½tre pour le login du joueur
 		login.setVisible(true);
 		login.setResizable(true);
 		login.setLocationRelativeTo(null);
