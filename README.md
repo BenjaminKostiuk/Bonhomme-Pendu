@@ -14,5 +14,5 @@ Everything's in French. Comments. Variable Names. Class Names. __Deal with it__.
 * Java
 
 ### Authors
-* Vyvy Ngo //TODO add Github
+* [Vyvy Ngo](https://github.com/vyvy-ngo)
 * Benjamin Kostiuk
